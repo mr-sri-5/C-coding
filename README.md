@@ -299,4 +299,21 @@ public:
 };
 
 
+palindrome 
 
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        int temp1=x;
+        int reverse=0;
+        if(x<0){
+            return false;
+        }
+        while(x!=0){
+            reverse=(reverse*10)+(x%10);
+            x=x/10;
+        }
+        return (reverse==temp1);
+        
+    }
+};
