@@ -361,3 +361,46 @@ public:
         return dp[m][n];
     }
 };
+
+
+Letter combination of phone number
+
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class Solution {
+public:
+    // Map digits to their corresponding characters (0 and 1 are empty)
+    vector<string> phoneMap = {
+        "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"
+    };
+
+    vector<string> letterCombinations(string digits) {
+        if (digits.empty()) return {};
+        
+        vector<string> result;
+        string current;
+        backtrack(digits, 0, current, result);
+        return result;
+    }
+
+private:
+    void backtrack(string &digits, int index, string &current, vector<string> &result) {
+        // Base case: if we've processed all digits, add the combination
+        if (index == digits.length()) {
+            result.push_back(current);
+            return;
+        }
+
+        // Get the letters for the current digit
+        string letters = phoneMap[digits[index] - '0'];
+        for (char c : letters) {
+            current.push_back(c);           // Add letter
+            backtrack(digits, index + 1, current, result); // Recurse
+            current.pop_back();            // Remove letter (backtrack)
+        }
+    }
+};
+
